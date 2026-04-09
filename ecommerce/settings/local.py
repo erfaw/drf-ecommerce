@@ -1,4 +1,7 @@
 from ecommerce.settings.base import *
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 DATABASES = {
     'default': {
@@ -6,3 +9,5 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+SECRET_KEY = os.environ.get('LOCAL_SECRET_KEY')
