@@ -1,7 +1,13 @@
 asgiref==3.11.1
+colorama==0.4.6
 Django==6.0.3
 djangorestframework==3.17.1
 dotenv==0.9.9
+iniconfig==2.3.0
+packaging==26.0
+pluggy==1.6.0
+Pygments==2.20.0
+pytest==9.0.2
 python-dotenv==1.2.2
 sqlparse==0.5.5
 tzdata==2026.1
