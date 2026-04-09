@@ -2,7 +2,7 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-DEBUG = False
+DEBUG = True
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -11,6 +11,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # External Packages
+    'rest_framework'
+    # Internal Packages
 ]
 
 MIDDLEWARE = [
@@ -66,3 +69,5 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = 'static/'
+
+REST_FRAMEWORK = {}
