@@ -1,12 +1,13 @@
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from ecommerce.product.views import CategoryViewSet
+from ecommerce.product.views import CategoryViewSet, BrandViewSet
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 
 router = DefaultRouter()
 router.register(r"category", CategoryViewSet)
+router.register(r"brand", BrandViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
