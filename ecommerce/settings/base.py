@@ -82,4 +82,5 @@ REST_FRAMEWORK = {
 
 SPECTACULAR_SETTINGS = {
     "TITLE": "Django DRF Ecommerce",
+    "SWAGGER_UI_DIST": "/static/swagger-ui/",
 }
