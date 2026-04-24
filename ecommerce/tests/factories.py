@@ -1,5 +1,5 @@
 import factory
-from ecommerce.product.models import Brand, Category
+from ecommerce.product.models import Brand, Category, Product
 
 
 class CategoryFactory(factory.django.DjangoModelFactory):
@@ -16,3 +16,11 @@ class BrandFactory(factory.django.DjangoModelFactory):
 
     # Name of actual Category table model fields
     name = "test_brand"
+
+
+class ProductFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Product
+
+    # Name of actual Category table model fields
+    name = "test_product"
