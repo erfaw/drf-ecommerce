@@ -1,17 +1,14 @@
-from django.test import TestCase
-from product.models import Category, Brand, Product
-
-
 class TestCategoryModel:
-    def test_str_method():
+    def test_str_method(self, category_factory):
         # Arrange
         # Act
+        _unit = category_factory()
         # Assert
-        pass
+        assert _unit.__str__() == "test_factory"
 
 
 class TestBrandModel:
-    def test_str_method():
+    def test_str_method(self):
         # Arrange
         # Act
         # Assert
@@ -19,7 +16,7 @@ class TestBrandModel:
 
 
 class TestProductModel:
-    def test_str_method():
+    def test_str_method(self):
         # Arrange
         # Act
         # Assert
