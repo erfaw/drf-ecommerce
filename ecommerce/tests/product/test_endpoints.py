@@ -17,3 +17,17 @@ class TestCategoryEndpoints:
         assert response.status_code == 200 # response checking
         assert len(json.loads(response.content)) == 4 # number checking
         print(json.loads(response.content))
+
+
+class TestBrandEndpoints:
+    endpoint = r"/api/brand/"
+
+    def test_category_get(self, brand_factory, api_client):
+        # Arrange
+        brand_factory.create_batch(4)
+        # Act
+        response = api_client().get(self.endpoint)
+        # Assert
+        assert response.status_code == 200 # response checking
+        assert len(json.loads(response.content)) == 4 # number checking
+        print(json.loads(response.content))
