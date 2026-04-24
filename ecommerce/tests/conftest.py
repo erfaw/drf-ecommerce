@@ -1,7 +1,6 @@
-from .factories import CategoryFactory
+from .factories import CategoryFactory, BrandFactory, ProductFactory
 from pytest_factoryboy import register
 
-register(
-    # Factories
-    CategoryFactory
-)
+register(CategoryFactory)
+register(BrandFactory)
+register(ProductFactory)
