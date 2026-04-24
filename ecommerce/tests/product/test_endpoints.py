@@ -22,7 +22,7 @@ class TestCategoryEndpoints:
 class TestBrandEndpoints:
     endpoint = r"/api/brand/"
 
-    def test_category_get(self, brand_factory, api_client):
+    def test_brand_get(self, brand_factory, api_client):
         # Arrange
         brand_factory.create_batch(4)
         # Act
@@ -36,7 +36,7 @@ class TestBrandEndpoints:
 class TestProductEndpoints:
     endpoint = r"/api/product/"
 
-    def test_category_get(self, product_factory, api_client):
+    def test_product_get(self, product_factory, api_client):
         # Arrange
         product_factory.create_batch(4)
         # Act
