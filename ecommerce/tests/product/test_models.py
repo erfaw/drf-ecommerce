@@ -4,7 +4,7 @@ class TestCategoryModel:
         # Act
         _unit = category_factory()
         # Assert
-        assert _unit.__str__() == "test_factory"
+        assert _unit.__str__() == "test_category"
 
 
 class TestBrandModel:
