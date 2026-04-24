@@ -9,7 +9,8 @@ class TestCategoryModel:
         # Act
         _unit = category_factory()
         # Assert
-        assert _unit.__str__() == "test_category"
+        # assert _unit.__str__() == "test_category"
+        assert _unit.__str__() == _unit.name
 
 
 class TestBrandModel:
@@ -18,7 +19,7 @@ class TestBrandModel:
         # Act
         _unit = brand_factory()
         # Assert
-        assert _unit.__str__() == "test_brand"
+        assert _unit.__str__() == _unit.name
 
 
 class TestProductModel:
@@ -27,4 +28,4 @@ class TestProductModel:
         # Act
         _unit = product_factory()
         # Assert
-        assert _unit.__str__() == "test_product"
+        assert _unit.__str__() == _unit.name
