@@ -2,8 +2,8 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.response import Response
 from drf_spectacular.utils import extend_schema
-from .models import Category, Brand, Product
-from .serializers import CategorySerializer, BrandSerializer, ProductSerializer
+from .models import Category, Brand, Product, ProductLine
+from .serializers import CategorySerializer, BrandSerializer, ProductSerializer, ProductLineSerializer
 
 
 class CategoryViewSet(viewsets.ViewSet):
@@ -42,4 +42,16 @@ class ProductViewSet(viewsets.ViewSet):
     @extend_schema(responses=ProductSerializer)
     def list(self, request):
         serializer = ProductSerializer(self.queryset, many=True)
+        return Response(serializer.data)
+
+
+class ProductLineViewSet(viewsets.ViewSet):
+    """
+    a simple ViewSet to get all ProductLines.
+    """
+    queryset = ProductLine.objects.all()
+
+    @extend_schema(responses=ProductLineSerializer)
+    def list(self, request):
+        serializer = ProductLineSerializer(self.queryset, many=True)
         return Response(serializer.data)
