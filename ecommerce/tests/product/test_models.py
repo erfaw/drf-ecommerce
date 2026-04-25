@@ -29,3 +29,12 @@ class TestProductModel:
         _unit = product_factory()
         # Assert
         assert _unit.__str__() == _unit.name
+
+
+class TestProductLineModel:
+    def test_str_method(self, product_line_factory):
+        # Arrange
+        # Act
+        _unit = product_line_factory()
+        # Assert
+        assert _unit.__str__() == _unit.name
