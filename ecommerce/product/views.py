@@ -44,6 +44,7 @@ class ProductViewSet(viewsets.ViewSet):
     """
 
     queryset = Product.objects.all()
+    lookup_field = "slug"
 
     @extend_schema(responses=ProductSerializer)
     def list(self, request):
@@ -67,11 +68,11 @@ class ProductViewSet(viewsets.ViewSet):
         return Response(serializer.data)
     
     @extend_schema(responses=ProductSerializer)
-    def retrieve(self, request, pk=None):
+    def retrieve(self, request, slug=None):
         """
-        to get a single product by id
+        to get a single product by slug
         """
-        serializer = ProductSerializer(self.queryset.get(id=pk),)
+        serializer = ProductSerializer(self.queryset.get(slug=slug),)
         return Response(serializer.data)
 
 
