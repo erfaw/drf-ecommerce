@@ -2,6 +2,10 @@ from django.contrib import admin
 from .models import Category, Brand, Product, ProductLine
 
 
+class ProductLineInline(admin.TabularInline):
+    model = ProductLine
+
+
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ("id", "name", "parent")
     list_filter = ("name",)
@@ -36,6 +40,7 @@ class ProductAdmin(admin.ModelAdmin):
         "name",
     )
     list_per_page = 25
+    inlines = [ProductLineInline]
 
 
 class ProductLineAdmin(admin.ModelAdmin):
@@ -48,7 +53,10 @@ class ProductLineAdmin(admin.ModelAdmin):
         "product",
         "is_active",
     )
-    list_filter = ("product","is_active",)
+    list_filter = (
+        "product",
+        "is_active",
+    )
     list_display_links = (
         "id",
         "name",
