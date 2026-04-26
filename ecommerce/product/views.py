@@ -65,6 +65,15 @@ class ProductViewSet(viewsets.ViewSet):
             many=True
         )
         return Response(serializer.data)
+    
+    @extend_schema(responses=ProductSerializer)
+    def retrieve(self, request, pk=None):
+        """
+        to get a single product by id
+        """
+        serializer = ProductSerializer(self.queryset.get(id=pk),)
+        return Response(serializer.data)
+
 
 
 class ProductLineViewSet(viewsets.ViewSet):
