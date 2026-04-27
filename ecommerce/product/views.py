@@ -43,7 +43,7 @@ class ProductViewSet(viewsets.ViewSet):
     a simple ViewSet for viewing all products.
     """
 
-    queryset = Product.objects.all()
+    queryset = Product.isactive.all()
     lookup_field = "slug"
 
     @extend_schema(responses=ProductSerializer)
