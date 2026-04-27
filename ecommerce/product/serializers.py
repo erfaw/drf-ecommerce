@@ -31,4 +31,12 @@ class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        exclude = ['id',]
+        fields = [
+            "name",
+            "slug",
+            "description",
+            "brand_name",
+            "category_name",
+            "is_digital",
+            "product_line"
+        ]
