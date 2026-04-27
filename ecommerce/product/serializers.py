@@ -14,6 +14,14 @@ class BrandSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class ProductLineSerializer(serializers.ModelSerializer):
+    # product = ProductSerializer() # THERE IS PROBLEM !!!
+
+    class Meta:
+        model = ProductLine
+        fields = "__all__"
+
+
 class ProductSerializer(serializers.ModelSerializer):
     brand = BrandSerializer()
     category = CategorySerializer()
@@ -21,12 +29,3 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = "__all__"
-
-
-class ProductLineSerializer(serializers.ModelSerializer):
-    product = ProductSerializer()
-
-    class Meta: 
-        model = ProductLine
-        fields = "__all__"
-
