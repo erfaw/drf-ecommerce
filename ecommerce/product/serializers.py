@@ -21,7 +21,7 @@ class ProductLineSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ProductLine
-        exclude = ['id', ]
+        exclude = ['id', "product", "is_active"]
 
 
 class ProductSerializer(serializers.ModelSerializer):
