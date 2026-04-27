@@ -41,7 +41,7 @@ class ProductSerializer(serializers.ModelSerializer):
             exclude = ['id', ]
 
 
-    brand = BrandSerializer()
+    brand_name = serializers.CharField(source="brand.name")
     category_name = serializers.CharField(source="category.name")
     product_line = ProductLineSerializer(many=True)
 
