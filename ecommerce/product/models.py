@@ -34,6 +34,7 @@ class Product(models.Model):
     category = TreeForeignKey(Category, on_delete=models.PROTECT, null=True, blank=True)
     is_active = models.BooleanField(default=False)
 
+    objects = models.Manager()
     isactive = ActiveManager()
 
     def __str__(self):
