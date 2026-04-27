@@ -24,9 +24,9 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 class ProductLineSerializer(serializers.ModelSerializer):
+    product = ProductSerializer()
+
     class Meta: 
         model = ProductLine
         fields = "__all__"
-    # TODO: test if can assign other serializer after Meta or not?
-    product = ProductSerializer()
 
