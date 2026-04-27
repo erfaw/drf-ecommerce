@@ -25,6 +25,7 @@ class ProductLineSerializer(serializers.ModelSerializer):
 class ProductSerializer(serializers.ModelSerializer):
     brand = BrandSerializer()
     category = CategorySerializer()
+    product_line = ProductLineSerializer(many=True)
 
     class Meta:
         model = Product
