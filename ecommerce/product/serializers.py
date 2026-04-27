@@ -42,7 +42,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
     brand = BrandSerializer()
-    category = CategorySerializer()
+    category_name = serializers.CharField(source="category.name")
     product_line = ProductLineSerializer(many=True)
 
     class Meta:
