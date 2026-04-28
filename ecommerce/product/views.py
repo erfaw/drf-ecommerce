@@ -72,9 +72,10 @@ class ProductViewSet(viewsets.ViewSet):
         """
         to get a single product by slug
         """
-        serializer = ProductSerializer(self.queryset.get(slug=slug),)
+        serializer = ProductSerializer(
+            self.queryset.select_related("category", "brand").get(slug=slug),
+        )
         return Response(serializer.data)
-
 
 
 class ProductLineViewSet(viewsets.ViewSet):
