@@ -7,6 +7,11 @@ class ActiveManager(models.Manager):
         return super().get_queryset().filter(is_active=True)
 
 
+class ActiveQuerySet(models.QuerySet):
+    def isactive(self):
+        return self.filter(is_active=True)
+
+
 class Category(MPTTModel):
     name = models.CharField(max_length=100, unique=True)
     parent = TreeForeignKey("self", on_delete=models.PROTECT, null=True, blank=True)
@@ -34,7 +39,7 @@ class Product(models.Model):
     category = TreeForeignKey(Category, on_delete=models.PROTECT, null=True, blank=True)
     is_active = models.BooleanField(default=False)
 
-    objects = models.Manager()
+    objects = ActiveQuerySet.as_manager() # objects = models.Manager()
     isactive = ActiveManager()
 
     def __str__(self):
