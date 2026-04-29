@@ -20,5 +20,9 @@ class OrderField(models.PositiveIntegerField):
             return [
                 checks.Error("OrderField must define a 'unique_for_field' attribute.")
             ]
+        elif self.unique_for_field not in [field.name for field in self.model._meta.get_fields()]:
+            return [
+                checks.Error("'unique_for_field' does not match any existing model field.")
+            ]
         else: 
             return []
