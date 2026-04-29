@@ -12,10 +12,10 @@ class OrderField(models.PositiveIntegerField):
     def check(self, **kwargs) -> list:
         return [
             *super().check(**kwargs),
-            *self._check_for_field(**kwargs),
+            *self._check_for_field_attribute(**kwargs),
         ]
     
-    def _check_for_field(self, **kwargs) -> List[checks.Error]:
+    def _check_for_field_attribute(self, **kwargs) -> List[checks.Error]:
         if self.unique_for_field is None:
             return [
                 checks.Error("OrderField must define a 'unique_for_field' attribute.")
