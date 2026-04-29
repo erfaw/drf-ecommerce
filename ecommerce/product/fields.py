@@ -29,4 +29,8 @@ class OrderField(models.PositiveIntegerField):
             return []
         
     def pre_save(self, model_instance: models.Model, add: bool) -> Any:
+
+        if getattr(model_instance, self.attname) == None:
+            return 1
+
         return super().pre_save(model_instance, add)
