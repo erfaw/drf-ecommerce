@@ -1,5 +1,6 @@
 from django.db import models
 from django.core import checks
+from typing import List
 
 class OrderField(models.PositiveIntegerField):
     description = "Ordering number field on a Unique field."
@@ -14,8 +15,10 @@ class OrderField(models.PositiveIntegerField):
             *self._check_for_field(**kwargs),
         ]
     
-    def _check_for_field(self, **kwargs):
+    def _check_for_field(self, **kwargs) -> List[checks.Error]:
         if self.unique_for_field is None:
             return [
                 checks.Error("OrderField must define a 'unique_for_field' attribute.")
             ]
+        else: 
+            return []
