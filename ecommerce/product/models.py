@@ -1,5 +1,6 @@
 from django.db import models
 from mptt.models import TreeForeignKey, MPTTModel
+from .fields import OrderField
 
 
 class ActiveManager(models.Manager):
@@ -52,6 +53,7 @@ class ProductLine(models.Model):
     sku = models.CharField() 
     stock_qty = models.IntegerField()
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="product_line")
+    order = OrderField()
     is_active = models.BooleanField(default=False)
 
     def __str__(self):
