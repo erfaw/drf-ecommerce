@@ -53,7 +53,7 @@ class ProductLine(models.Model):
     sku = models.CharField() 
     stock_qty = models.IntegerField()
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="product_line")
-    order = OrderField()
+    order = OrderField(blank=True)
     is_active = models.BooleanField(default=False)
 
     def __str__(self):
