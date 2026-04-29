@@ -1,6 +1,6 @@
 from django.db import models
 from mptt.models import TreeForeignKey, MPTTModel
-from fields import OrderField
+from .fields import OrderField
 
 
 class ActiveManager(models.Manager):
@@ -33,7 +33,7 @@ class Brand(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
-    slug = models.SlugField(max_length=255, null=True) # TODO : make it null=False
+    slug = models.SlugField(max_length=255, null=False)
     description = models.TextField(blank=True)
     is_digital = models.BooleanField(default=False)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
