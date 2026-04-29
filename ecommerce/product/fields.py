@@ -1,4 +1,5 @@
 from django.db import models
 
 class OrderField(models.PositiveIntegerField):
-    pass
+    description = "Ordering number field on a Unique field."
+    
