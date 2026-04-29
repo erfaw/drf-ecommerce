@@ -1,6 +1,7 @@
 from django.db import models
 from django.core import checks
-from typing import List
+from typing import Any, List
+from pytest_django.asserts import Model
 
 class OrderField(models.PositiveIntegerField):
     description = "Ordering number field on a Unique field."
@@ -26,3 +27,6 @@ class OrderField(models.PositiveIntegerField):
             ]
         else: 
             return []
+        
+    def pre_save(self, model_instance: models.Model, add: bool) -> Any:
+        return super().pre_save(model_instance, add)
