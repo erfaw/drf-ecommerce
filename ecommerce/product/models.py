@@ -57,12 +57,13 @@ class ProductLine(models.Model):
     order = OrderField(unique_for_field="product", blank=True) # pyright: ignore[reportCallIssue]
     is_active = models.BooleanField(default=False)
 
-    def clean_fields(self, exclude): # TODO : change this with clean() 
-        super().clean_fields(exclude)
+    def clean(self):  
         qs = ProductLine.objects.filter(product=self.product)
         for obj in qs:
             if self.id != obj.id and self.order == obj.order:
                 raise ValidationError("Duplicate value .")
+            
+        return super().clean()
 
     def __str__(self):
         return self.sku
