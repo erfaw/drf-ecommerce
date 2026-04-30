@@ -1,4 +1,5 @@
 import pytest
+from django.core.exceptions import ValidationError
 
 pytestmark = pytest.mark.django_db
 
@@ -32,7 +33,6 @@ class TestProductModel:
 
     def test_ActiveQuerySet(self, product_factory):
         pass
-        
         # TODO : make a test for ActiveQuerySet
         # queryset = product_factory.create_batch(5)
         # for q in queryset:
@@ -47,6 +47,8 @@ class TestProductLineModel:
         # Assert
         assert _unit.__str__() == _unit.sku
 
-    # TODO: make a test `test_duplicate_order_values` for ProductLine.clean() or clean_fields() method.
-    def test_duplicate_order_values(self):
-        pass
+    def test_duplicate_order_values(self, product_factory, product_line_factory):
+        obj = product_factory()
+        product_line_factory(order=1, product=obj,)
+        with pytest.raises(ValidationError):
+            product_line_factory(order=1, product=obj,).clean()
