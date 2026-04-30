@@ -40,3 +40,5 @@ class TestProductLineModel:
         assert _unit.__str__() == _unit.sku
 
     # TODO: make a test `test_duplicate_order_values` for ProductLine.clean() or clean_fields() method.
+    def test_duplicate_order_values(self):
+        pass
