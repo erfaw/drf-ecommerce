@@ -65,4 +65,4 @@ class ProductLine(models.Model):
                 raise ValidationError("Duplicate value .")
 
     def __str__(self):
-        return self.name
+        return self.sku
