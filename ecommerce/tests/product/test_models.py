@@ -38,3 +38,5 @@ class TestProductLineModel:
         _unit = product_line_factory()
         # Assert
         assert _unit.__str__() == _unit.name
+
+    # TODO: make a test `test_duplicate_order_values` for ProductLine.clean() or clean_fields() method.

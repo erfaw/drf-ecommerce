@@ -57,7 +57,7 @@ class ProductLine(models.Model):
     order = OrderField(unique_for_field="product", blank=True) # pyright: ignore[reportCallIssue]
     is_active = models.BooleanField(default=False)
 
-    def clean_fields(self, exclude):
+    def clean_fields(self, exclude): # TODO : change this with clean() 
         super().clean_fields(exclude)
         qs = ProductLine.objects.filter(product=self.product)
         for obj in qs:
