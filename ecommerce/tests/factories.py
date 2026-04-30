@@ -38,3 +38,4 @@ class ProductLineFactory(factory.django.DjangoModelFactory):
     stock_qty = 123456789
     product = factory.SubFactory(ProductFactory)
     is_active = True
+    # Why there is not any 'order' ==> because its generate automaticly
