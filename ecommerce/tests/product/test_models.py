@@ -30,6 +30,14 @@ class TestProductModel:
         # Assert
         assert _unit.__str__() == _unit.name
 
+    def test_ActiveQuerySet(self, product_factory):
+        pass
+        
+        # TODO : make a test for ActiveQuerySet
+        # queryset = product_factory.create_batch(5)
+        # for q in queryset:
+        #     assert q.isactive() == True
+
 
 class TestProductLineModel:
     def test_str_method(self, product_line_factory):
