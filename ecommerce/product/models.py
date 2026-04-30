@@ -60,7 +60,7 @@ class ProductLine(models.Model):
     def clean(self):  
         qs = ProductLine.objects.filter(product=self.product)
         for obj in qs:
-            if self.id != obj.id and self.order == obj.order:
+            if self.pk != obj.pk and self.order == obj.order:
                 raise ValidationError("Duplicate value .")
             
         return super().clean()
