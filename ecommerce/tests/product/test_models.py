@@ -31,12 +31,37 @@ class TestProductModel:
         # Assert
         assert _unit.__str__() == _unit.name
 
-    def test_ActiveQuerySet(self, product_factory):
-        pass
-        # TODO : make a test for ActiveQuerySet
-        # queryset = product_factory.create_batch(5)
-        # for q in queryset:
-        #     assert q.isactive() == True
+    def test_ActiveQuerySet(self, product_factory, product_line_factory):
+        """
+        Make a Product then make few ProductLine which is_active=True and assign to Product, then make just one is_active=False ProductLine and assign, then assert to test all this situation and also **Product.objects.isactive()**
+        """
+        product_test_record = product_factory()
+        TRUE_NUM = 5
+
+        true_product_lines = product_line_factory.create_batch(
+            TRUE_NUM,
+            product=product_test_record,
+        )
+
+        false_product_line_test_record =product_line_factory(
+            product=product_test_record,
+            name="is_active=false-1",
+            is_active=False,
+        )
+
+        assert false_product_line_test_record.is_active == False
+        
+        assert len(true_product_lines) == TRUE_NUM
+
+        qs_all_product_lines = true_product_lines[0].__class__.objects.all()
+        assert len(qs_all_product_lines) == TRUE_NUM+1
+
+        last_product_line_by_query = qs_all_product_lines.latest('id')
+        assert last_product_line_by_query.is_active == False
+
+        qs = product_test_record.__class__.objects.isactive()
+        for pl in qs:
+            assert pl.is_active == True
 
 
 class TestProductLineModel:
