@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Brand, Product, ProductLine
+from .models import Category, Brand, Product, ProductLine, ProductImage
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 
@@ -13,6 +13,10 @@ class EditLinkInline:
             )
         else:
             return ""
+
+
+class ProductImageInline(admin.TabularInline):
+    model = ProductImage
 
 
 class ProductLineInline(admin.TabularInline):
