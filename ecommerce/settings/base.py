@@ -84,3 +84,6 @@ SPECTACULAR_SETTINGS = {
     "TITLE": "Django DRF Ecommerce",
     "SWAGGER_UI_DIST": "/static/swagger-ui/",
 }
+
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = 'media/'
