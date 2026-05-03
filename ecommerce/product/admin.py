@@ -79,6 +79,7 @@ class ProductLineAdmin(admin.ModelAdmin):
         "name",
     )
     list_per_page = 25
+    inlines = [ProductImageInline]
 
 
 admin.site.register(Category, CategoryAdmin)
