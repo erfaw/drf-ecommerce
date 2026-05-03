@@ -60,6 +60,8 @@ class TestProductEndpoints:
             response_json,dict,): 
             assert response_json["slug"] == obj.slug
 
+    def test_return_products_by_category_slug(self):
+        pass
 
 class TestProductLineEndpoints:
     endpoint = r"/api/product-line/"
