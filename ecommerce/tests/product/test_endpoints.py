@@ -46,6 +46,20 @@ class TestProductEndpoints:
         assert len(json.loads(response.content)) == 4 # number checking
         print(json.loads(response.content))
 
+    def test_return_single_product_by_slug(self, product_factory, api_client):
+        obj = product_factory(slug="test-slug")
+        response = api_client().get(f"{self.endpoint}{obj.slug}/")
+
+        assert response.status_code == 200 
+
+        response_json = json.loads(response.content)
+        if isinstance(response.content,list,): 
+            assert len(response_json) == 1
+            assert response_json[0]["slug"] == obj.slug
+        elif isinstance(
+            response_json,dict,): 
+            assert response_json["slug"] == obj.slug
+
 
 class TestProductLineEndpoints:
     endpoint = r"/api/product-line/"
