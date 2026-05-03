@@ -83,7 +83,7 @@ class ProductLine(models.Model):
 class ProductImage(models.Model):
     name = models.CharField(max_length=100)
     alternative_text = models.CharField(max_length=100)
-    url = models.ImageField(upload_to=None)
+    url = models.ImageField(upload_to=r'photos/%Y/%m/%d/')
     productline = models.ForeignKey(
         ProductLine, on_delete=models.CASCADE, related_name="product_image"
     )
