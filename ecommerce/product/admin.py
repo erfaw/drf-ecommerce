@@ -5,12 +5,13 @@ from django.utils.safestring import mark_safe
 
 class EditLinkInline:
     def edit(self, instance):
-        url = reverse(f"admin:{instance._meta.app_label}_{instance._meat.model_name}_change")
+        url = reverse(
+            f"admin:{instance._meta.app_label}_{instance._meta.model_name}_change",
+            args=[instance.pk],
+        )
 
         if instance.pk:
-            return mark_safe(
-                f"<a href='{url}'>Edit</a>"
-            )
+            return mark_safe(f"<a href='{url}'>Edit</a>")
         else:
             return ""
 
