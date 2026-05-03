@@ -87,7 +87,9 @@ class ProductImage(models.Model):
     productline = models.ForeignKey(
         ProductLine, on_delete=models.CASCADE, related_name="product_image"
     )
-    order = OrderField(unique_for_field="productline", blank=True)
+    order = OrderField(
+        unique_for_field="productline", blank=True
+    )  # pyright: ignore[reportCallIssue]
 
     def clean(self):
         qs = ProductImage.objects.filter(productline=self.productline)
