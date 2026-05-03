@@ -65,6 +65,10 @@ class ProductLine(models.Model):
                 raise ValidationError("Duplicate value .")
             
         return super().clean()
+    
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        return super(ProductLine, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.sku
