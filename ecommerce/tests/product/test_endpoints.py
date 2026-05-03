@@ -60,8 +60,31 @@ class TestProductEndpoints:
             response_json,dict,): 
             assert response_json["slug"] == obj.slug
 
-    def test_return_products_by_category_slug(self):
-        pass
+    def test_return_products_by_category_slug(self, product_factory, category_factory, api_client):
+        category_obj = category_factory(slug="test-category-1", name="test-category-1")
+        another_category_obj = category_factory(slug="another-category-2", name="another-category-2")
+
+        NUM_OF_RIGHT_CAT = 5
+        product_obj = product_factory.create_batch(NUM_OF_RIGHT_CAT, category=category_obj,)
+        another_product_obj = product_factory(category=another_category_obj)
+
+        all_of_cats = category_obj.__class__.objects.all()
+        assert len(all_of_cats) == 2
+
+        all_of_products = product_obj[0].__class__.objects.all()
+        assert len(all_of_products) == NUM_OF_RIGHT_CAT+1
+
+        response_products_by_category_slug = api_client().get(f"{self.endpoint}category/{category_obj.slug}/all/")
+        assert response_products_by_category_slug.status_code == 200
+
+        response_json = json.loads(response_products_by_category_slug.content)
+        
+        assert isinstance(response_json, list)
+        assert len(response_json) == NUM_OF_RIGHT_CAT
+        
+        for product in response_json:
+            assert product["category_name"] == category_obj.name
+            assert product["category_name"] != another_category_obj.name 
 
 class TestProductLineEndpoints:
     endpoint = r"/api/product-line/"
