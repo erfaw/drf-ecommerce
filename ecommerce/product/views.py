@@ -97,8 +97,9 @@ class ProductImageViewSet(viewsets.ViewSet):
     A ViewSet to work with ProductImage Model.
     """
     queryset = ProductImage.objects.all()
-
-    def list(self):
+    
+    @extend_schema(responses=ProductImageSerializer)
+    def list(self, request):
         """
         Get list of all ProductImages.
         """
