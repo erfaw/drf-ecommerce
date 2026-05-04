@@ -71,8 +71,8 @@ class TestProductEndpoints:
         all_of_cats = category_obj.__class__.objects.all()
         assert len(all_of_cats) == 2
 
-        all_of_products = product_obj[0].__class__.objects.all()
-        assert len(all_of_products) == NUM_OF_RIGHT_CAT+1
+        num_all_products = product_obj[0].__class__.objects.count()
+        assert num_all_products == NUM_OF_RIGHT_CAT+1
 
         response_products_by_category_slug = api_client().get(f"{self.endpoint}category/{category_obj.slug}/all/")
         assert response_products_by_category_slug.status_code == 200
