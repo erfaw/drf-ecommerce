@@ -3,12 +3,13 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from drf_spectacular.utils import extend_schema
-from .models import Category, Brand, Product, ProductLine
+from .models import Category, Brand, Product, ProductLine, ProductImage
 from .serializers import (
     CategorySerializer,
     BrandSerializer,
     ProductSerializer,
     ProductLineSerializer,
+    ProductImageSerializer
 )
 
 
@@ -88,4 +89,18 @@ class ProductLineViewSet(viewsets.ViewSet):
     @extend_schema(responses=ProductLineSerializer)
     def list(self, request):
         serializer = ProductLineSerializer(self.queryset, many=True)
+        return Response(serializer.data)
+
+
+class ProductImageViewSet(viewsets.ViewSet):
+    """
+    A ViewSet to work with ProductImage Model.
+    """
+    queryset = ProductImage.objects.all()
+
+    def list(self):
+        """
+        Get list of all ProductImages.
+        """
+        serializer = ProductImageSerializer(self.queryset, many=True)
         return Response(serializer.data)
