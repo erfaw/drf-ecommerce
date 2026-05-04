@@ -15,8 +15,8 @@ class TestCategoryEndpoints:
         response = api_client().get(self.endpoint)
         # Assert
         assert response.status_code == 200 # response checking
-        assert len(json.loads(response.content)) == 4 # number checking
-        print(json.loads(response.content))
+        assert len(response.json()) == 4 # number checking
+        print(response.json())
 
 
 class TestBrandEndpoints:
@@ -29,8 +29,8 @@ class TestBrandEndpoints:
         response = api_client().get(self.endpoint)
         # Assert
         assert response.status_code == 200 # response checking
-        assert len(json.loads(response.content)) == 4 # number checking
-        print(json.loads(response.content))
+        assert len(response.json()) == 4 # number checking
+        print(response.json())
 
 
 class TestProductEndpoints:
@@ -43,8 +43,8 @@ class TestProductEndpoints:
         response = api_client().get(self.endpoint)
         # Assert
         assert response.status_code == 200 # response checking
-        assert len(json.loads(response.content)) == 4 # number checking
-        print(json.loads(response.content))
+        assert len(response.json()) == 4 # number checking
+        print(response.json())
 
     def test_return_single_product_by_slug(self, product_factory, api_client):
         obj = product_factory(slug="test-slug")
@@ -52,8 +52,8 @@ class TestProductEndpoints:
 
         assert response.status_code == 200 
 
-        response_json = json.loads(response.content)
-        if isinstance(response.content,list,): 
+        response_json = response.json()
+        if isinstance(response.json(), list,): 
             assert len(response_json) == 1
             assert response_json[0]["slug"] == obj.slug
         elif isinstance(
@@ -77,7 +77,7 @@ class TestProductEndpoints:
         response_products_by_category_slug = api_client().get(f"{self.endpoint}category/{category_obj.slug}/all/")
         assert response_products_by_category_slug.status_code == 200
 
-        response_json = json.loads(response_products_by_category_slug.content)
+        response_json = response_products_by_category_slug.json()
         
         assert isinstance(response_json, list)
         assert len(response_json) == NUM_OF_RIGHT_CAT
@@ -95,7 +95,7 @@ class TestProductLineEndpoints:
         product_line_factory.create_batch(len_num)
         # Act
         response = api_client().get(self.endpoint)
-        loaded_response = json.loads(response.content)
+        loaded_response = response.json()
         # Assert
         assert response.status_code == 200
         assert len(loaded_response) == len_num
