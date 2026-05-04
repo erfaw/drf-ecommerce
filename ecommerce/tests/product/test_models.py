@@ -53,8 +53,8 @@ class TestProductModel:
         
         assert len(true_product_lines) == TRUE_NUM
 
-        qs_all_product_lines = true_product_lines[0].__class__.objects.all()
-        assert len(qs_all_product_lines) == TRUE_NUM+1
+        num_all_product_lines = true_product_lines[0].__class__.objects.count()
+        assert num_all_product_lines == TRUE_NUM+1
 
         last_product_line_by_query = true_product_lines[0].__class__.objects.latest('id')
         assert last_product_line_by_query.is_active == False
