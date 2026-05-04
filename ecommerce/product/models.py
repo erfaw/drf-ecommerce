@@ -54,7 +54,7 @@ class Product(models.Model):
 class ProductLine(models.Model):
     name = models.CharField(max_length=100)
     price = models.DecimalField(decimal_places=2, max_digits=5)
-    sku = models.CharField()
+    sku = models.CharField() # Note: it is different than slug!
     stock_qty = models.IntegerField()
     product = models.ForeignKey(
         Product, on_delete=models.CASCADE, related_name="product_line"
@@ -77,7 +77,7 @@ class ProductLine(models.Model):
         return super(ProductLine, self).save(*args, **kwargs)
 
     def __str__(self):
-        return self.sku
+        return self.sku # TODO : change return to self.name
 
 
 class ProductImage(models.Model):
