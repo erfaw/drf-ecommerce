@@ -68,8 +68,8 @@ class TestProductEndpoints:
         product_obj = product_factory.create_batch(NUM_OF_RIGHT_CAT, category=category_obj,)
         another_product_obj = product_factory(category=another_category_obj)
 
-        all_of_cats = category_obj.__class__.objects.all()
-        assert len(all_of_cats) == 2
+        num_all_cats = category_obj.__class__.objects.count()
+        assert num_all_cats == 2
 
         num_all_products = product_obj[0].__class__.objects.count()
         assert num_all_products == NUM_OF_RIGHT_CAT+1
