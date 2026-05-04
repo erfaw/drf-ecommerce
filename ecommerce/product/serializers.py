@@ -51,4 +51,9 @@ class ProductImageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ProductImage
-        fields = "__all__"
+        fields = [
+            "alternative_text",
+            "url",
+            "productline_name",
+            "order",
+        ]
