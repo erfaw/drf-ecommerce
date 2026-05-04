@@ -20,6 +20,19 @@ class BrandSerializer(serializers.ModelSerializer):
         ]
 
 
+class ProductImageSerializer(serializers.ModelSerializer):
+    productline_name = serializers.CharField(source="productline.name")
+
+    class Meta:
+        model = ProductImage
+        fields = [
+            "alternative_text",
+            "url",
+            "productline_name",
+            "order",
+        ]
+
+
 class ProductLineSerializer(serializers.ModelSerializer):
     product_name = serializers.CharField(source="product.name")
 
@@ -43,17 +56,4 @@ class ProductSerializer(serializers.ModelSerializer):
             "category_name",
             "is_digital",
             "product_line",
-        ]
-
-
-class ProductImageSerializer(serializers.ModelSerializer):
-    productline_name = serializers.CharField(source="productline.name")
-
-    class Meta:
-        model = ProductImage
-        fields = [
-            "alternative_text",
-            "url",
-            "productline_name",
-            "order",
         ]
