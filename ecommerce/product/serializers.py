@@ -47,7 +47,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 class ProductImageSerializer(serializers.ModelSerializer):
-    productline = ProductLineSerializer()
+    productline_name = serializers.CharField(source="productline.name")
 
     class Meta:
         model = ProductImage
