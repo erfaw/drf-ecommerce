@@ -35,10 +35,19 @@ class ProductImageSerializer(serializers.ModelSerializer):
 
 class ProductLineSerializer(serializers.ModelSerializer):
     product_name = serializers.CharField(source="product.name")
+    product_image = ProductImageSerializer(many=True)
 
     class Meta:
         model = ProductLine
-        exclude = ["id", "product", "is_active"]
+        fields = [
+            "name",
+            "price",
+            "sku",
+            "stock_qty",
+            "product_name",
+            "order",
+            "product_image",
+        ]
 
 
 class ProductSerializer(serializers.ModelSerializer):
