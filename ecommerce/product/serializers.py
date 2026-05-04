@@ -46,7 +46,7 @@ class ProductSerializer(serializers.ModelSerializer):
         ]
 
 
-class ProductImageSerializer(serializers.Serializer):
+class ProductImageSerializer(serializers.ModelSerializer):
     productline = ProductLineSerializer()
 
     class Meta:
