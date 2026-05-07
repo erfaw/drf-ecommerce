@@ -13,11 +13,7 @@ from .serializers import (
 )
 from django.db.models import Prefetch
 
-from django.db import connection
-from sqlparse import format
-from pygments import highlight
-from pygments.formatters import TerminalFormatter
-from pygments.lexers.sql import SqlLexer   
+from sql_check.main import run_sql_check
 
 
 class CategoryViewSet(viewsets.ViewSet):
@@ -84,25 +80,8 @@ class ProductViewSet(viewsets.ViewSet):
             # self.queryset.select_related("category", "brand").get(slug=slug),
             self.queryset.select_related("category", "brand").prefetch_related(Prefetch("product_line")).prefetch_related(Prefetch("product_line__product_image")).get(slug=slug),
         )
-        response = Response(serializer.data)
-
-        print("===== (START) Query N+1 Checks =====")
-
-        raw_sql: list[dict] = connection.queries
-        print(f"Number of Executed Queries:\t{len(raw_sql)}")
-
-        for q in raw_sql:
-            print(
-                highlight(
-                    format(q['sql'], reindent=True),
-                    SqlLexer(), 
-                    TerminalFormatter(),
-                )
-            )
-        print(f"Number of Executed Queries:\t{len(raw_sql)}")
-        print("===== (END) Query N+1 Checks  =====")
-
-        return response
+        run_sql_check()
+        return Response(serializer.data)
 
 
 class ProductLineViewSet(viewsets.ViewSet):
