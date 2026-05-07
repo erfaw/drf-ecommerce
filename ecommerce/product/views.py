@@ -13,8 +13,6 @@ from .serializers import (
 )
 from django.db.models import Prefetch
 
-from sql_check.main import run_sql_check
-
 
 class CategoryViewSet(viewsets.ViewSet):
     """
@@ -70,17 +68,18 @@ class ProductViewSet(viewsets.ViewSet):
             many=True,
         )
         return Response(serializer.data)
-    
+
     @extend_schema(responses=ProductSerializer)
     def retrieve(self, request, slug=None):
         """
         to get a single product by slug
         """
         serializer = ProductSerializer(
-            # self.queryset.select_related("category", "brand").get(slug=slug),
-            self.queryset.select_related("category", "brand").prefetch_related(Prefetch("product_line")).prefetch_related(Prefetch("product_line__product_image")).get(slug=slug),
+            self.queryset.select_related("category", "brand")
+            .prefetch_related(Prefetch("product_line"))
+            .prefetch_related(Prefetch("product_line__product_image"))
+            .get(slug=slug),
         )
-        run_sql_check()
         return Response(serializer.data)
 
 
