@@ -1,6 +1,6 @@
 import factory
 from factory.declarations import SubFactory, Sequence 
-from ecommerce.product.models import Brand, Category, Product, ProductLine
+from ecommerce.product.models import Brand, Category, Product, ProductLine, ProductImage
 
 
 class CategoryFactory(factory.django.DjangoModelFactory):
@@ -40,3 +40,15 @@ class ProductLineFactory(factory.django.DjangoModelFactory):
     product = SubFactory(ProductFactory)
     is_active = True
     # Why there is not any 'order' ==> because its generate automaticly
+
+
+class ProductImageFactory(factory.django.DjangoModelFactory):
+    class Meta: 
+        model = ProductImage
+
+    name = Sequence(lambda n: f"ProductImage-{n}")
+    alternative_text = "alternative_text-test"
+    url = "https://url-test.com"
+    productline = SubFactory(ProductLine)
+    # Why there is not any 'order' ==> because its generate automaticly
+    
