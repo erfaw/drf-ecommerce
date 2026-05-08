@@ -43,7 +43,8 @@ class Product(models.Model):
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
     category = TreeForeignKey(Category, on_delete=models.PROTECT, null=True, blank=True)
     is_active = models.BooleanField(default=False)
-
+    # `related_name` fields
+    # product_line
     objects = ActiveQuerySet.as_manager()  # objects = models.Manager()
     isactive = ActiveManager()
 
@@ -54,6 +55,9 @@ class Product(models.Model):
 class Attribute(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True)
+    # `related_name` fields
+    # attribute_value
+    
 
     def __str__(self):
         return self.name
@@ -64,9 +68,20 @@ class AttributeValue(models.Model):
     attribute = models.ForeignKey(
         Attribute, on_delete=models.CASCADE, related_name="attribute_value"
     )
+    # `related_name` fields
+    # product_line_attribute_value_av
+
 
     def __str__(self):
         return self.value
+
+
+class ProductLineAttributeValue(models.Model):
+    attribute_value = models.ForeignKey(AttributeValue, on_delete=models.CASCADE, related_name="product_line_attribute_value_av")
+    product_line = models.ForeignKey('ProductLine', on_delete=models.CASCADE, related_name="product_line_attribute_value_pl")
+
+    class Meta:
+        unique_together = ["attribute_value", "product_line",]
 
 
 class ProductLine(models.Model):
@@ -81,6 +96,11 @@ class ProductLine(models.Model):
         unique_for_field="product", blank=True
     )  # pyright: ignore[reportCallIssue]
     is_active = models.BooleanField(default=False)
+    attribute_value = models.ManyToManyField(AttributeValue, through=ProductLineAttributeValue)
+    # `related_name` fields:
+    # product_line_attribute_value_pl
+    # product_image
+
 
     def clean(self):
         qs = ProductLine.objects.filter(product=self.product)
