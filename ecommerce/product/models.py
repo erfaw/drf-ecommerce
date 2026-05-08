@@ -70,6 +70,7 @@ class AttributeValue(models.Model):
     )
     # `related_name` fields
     # product_line_attribute_value_av
+    # product_line_attribute_value
 
 
     def __str__(self):
@@ -96,7 +97,7 @@ class ProductLine(models.Model):
         unique_for_field="product", blank=True
     )  # pyright: ignore[reportCallIssue]
     is_active = models.BooleanField(default=False)
-    attribute_value = models.ManyToManyField(AttributeValue, through=ProductLineAttributeValue)
+    attribute_value = models.ManyToManyField(AttributeValue, through=ProductLineAttributeValue, related_name="product_line_attribute_value")
     # `related_name` fields:
     # product_line_attribute_value_pl
     # product_image
