@@ -60,13 +60,13 @@ class Attribute(models.Model):
 
 
 class AttributeValue(models.Model):
-    att_value = models.CharField(max_length=100)
+    value = models.CharField(max_length=100)
     attribute = models.ForeignKey(
         Attribute, on_delete=models.CASCADE, related_name="attribute_value"
     )
 
     def __str__(self):
-        return self.att_value
+        return self.value
 
 
 class ProductLine(models.Model):
