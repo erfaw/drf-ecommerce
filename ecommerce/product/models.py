@@ -51,6 +51,24 @@ class Product(models.Model):
         return self.name
 
 
+class Attribute(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.name
+
+
+class AttributeValue(models.Model):
+    att_value = models.CharField(max_length=100)
+    attribute = models.ForeignKey(
+        Attribute, on_delete=models.CASCADE, related_name="attribute_value"
+    )
+
+    def __str__(self):
+        return self.att_value
+
+
 class ProductLine(models.Model):
     name = models.CharField(max_length=100)
     price = models.DecimalField(decimal_places=2, max_digits=5)
