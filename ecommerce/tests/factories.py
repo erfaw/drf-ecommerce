@@ -49,6 +49,6 @@ class ProductImageFactory(factory.django.DjangoModelFactory):
     name = Sequence(lambda n: f"ProductImage-{n}")
     alternative_text = "alternative_text-test"
     url = "https://url-test.com"
-    productline = SubFactory(ProductLine)
+    productline = SubFactory(ProductLineFactory)
     # Why there is not any 'order' ==> because its generate automaticly
     
