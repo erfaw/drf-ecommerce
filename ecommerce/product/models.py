@@ -74,7 +74,7 @@ class AttributeValue(models.Model):
 
 
     def __str__(self):
-        return self.value
+        return f"{self.attribute}=\t{self.value}"
 
 
 class ProductLineAttributeValue(models.Model):
@@ -85,7 +85,7 @@ class ProductLineAttributeValue(models.Model):
         unique_together = ["attribute_value", "product_line",]
     
     def __str__(self):
-        return f"{self.product_line} : {self.attribute_value.attribute} : {self.attribute_value}"
+        return f"{self.product_line} : {self.attribute_value}"
 
 
 class ProductLine(models.Model):
