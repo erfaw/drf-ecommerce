@@ -1,5 +1,14 @@
 from django.contrib import admin
-from .models import Category, Brand, Product, ProductLine, ProductImage
+from .models import (
+    Category,
+    Brand,
+    Product,
+    ProductLine,
+    ProductImage,
+    Attribute,
+    AttributeValue,
+    ProductLineAttributeValue,
+)
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 
@@ -98,6 +107,52 @@ class ProductImageAdmin(admin.ModelAdmin):
     )
     list_per_page = 25
 
+class AttributeAdmin(admin.ModelAdmin):
+    list_display = (
+        "id",
+        "name",
+        "description",
+    )
+    list_display_links = (
+        "id",
+        "name",
+    )
+    list_per_page = 25
+
+
+class AttributeValueAdmin(admin.ModelAdmin):
+    list_display = (
+        "id",
+        "value",
+        "attribute",
+    )
+    list_display_links = (
+        "id",
+        "value",
+        "attribute",
+    )
+    list_per_page = 25
+
+
+class ProductLineAttributeValueAdmin(admin.ModelAdmin):
+    list_display = (
+        "id",
+        "name",
+        "url",
+        "alternative_text",
+        "order",
+    )
+    list_display_links = (
+        "id",
+        "name",
+        "url"
+    )
+    list_per_page = 25
+
+
+admin.site.register(ProductLineAttributeValue)
+admin.site.register(AttributeValue, AttributeValueAdmin)
+admin.site.register(Attribute, AttributeAdmin)
 admin.site.register(ProductImage, ProductImageAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Brand, BrandAdmin)
