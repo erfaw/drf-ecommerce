@@ -34,6 +34,10 @@ class ProductLineInline(EditLinkInline, admin.TabularInline):
     readonly_fields = ["edit",]
 
 
+class AttributeValueInline(admin.TabularInline):
+    model = AttributeValue.product_line_attribute_value.through
+
+
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ("id", "name", "parent")
     list_filter = ("name",)
@@ -90,7 +94,7 @@ class ProductLineAdmin(admin.ModelAdmin):
         "name",
     )
     list_per_page = 25
-    inlines = [ProductImageInline]
+    inlines = [ProductImageInline, AttributeValueInline,]
 
 class ProductImageAdmin(admin.ModelAdmin):
     list_display = (
@@ -137,20 +141,17 @@ class AttributeValueAdmin(admin.ModelAdmin):
 class ProductLineAttributeValueAdmin(admin.ModelAdmin):
     list_display = (
         "id",
-        "name",
-        "url",
-        "alternative_text",
-        "order",
+        "product_line",
+        "attribute_value__attribute",
+        "attribute_value",
     )
     list_display_links = (
         "id",
-        "name",
-        "url"
     )
     list_per_page = 25
 
 
-admin.site.register(ProductLineAttributeValue)
+admin.site.register(ProductLineAttributeValue, ProductLineAttributeValueAdmin)
 admin.site.register(AttributeValue, AttributeValueAdmin)
 admin.site.register(Attribute, AttributeAdmin)
 admin.site.register(ProductImage, ProductImageAdmin)
