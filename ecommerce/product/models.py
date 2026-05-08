@@ -83,6 +83,9 @@ class ProductLineAttributeValue(models.Model):
 
     class Meta:
         unique_together = ["attribute_value", "product_line",]
+    
+    def __str__(self):
+        return f"{self.product_line} : {self.attribute_value.attribute} : {self.attribute_value}"
 
 
 class ProductLine(models.Model):
