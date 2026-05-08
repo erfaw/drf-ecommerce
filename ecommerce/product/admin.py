@@ -35,7 +35,7 @@ class ProductLineInline(EditLinkInline, admin.TabularInline):
 
 
 class AttributeValueInline(admin.TabularInline):
-    model = AttributeValue.product_line_attribute_value.through
+    model = AttributeValue.product_line_attribute_value.through # type: ignore
 
 
 class CategoryAdmin(admin.ModelAdmin):
