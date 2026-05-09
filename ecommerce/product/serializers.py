@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Category, Brand, Product, ProductLine, ProductImage, Attribute
+from .models import Category, Brand, Product, ProductLine, ProductImage, Attribute, AttributeValue
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -37,6 +37,17 @@ class AttributeSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Attribute
         exclude = ['id',]
+
+
+class AttributeValueSerializer(serializers.ModelSerializer):
+    attribute = AttributeSerializer(many=True)
+
+    class Meta: 
+        model = AttributeValue
+        fields = [
+            "attribute",
+            "value",
+        ]
 
 
 class ProductLineSerializer(serializers.ModelSerializer):
