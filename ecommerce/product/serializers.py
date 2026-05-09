@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Category, Brand, Product, ProductLine, ProductImage
+from .models import Category, Brand, Product, ProductLine, ProductImage, Attribute
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -31,6 +31,12 @@ class ProductImageSerializer(serializers.ModelSerializer):
             "productline_name",
             "order",
         ]
+
+
+class AttributeSerializer(serializers.ModelSerializer):
+    class Meta: 
+        model = Attribute
+        exclude = ['id',]
 
 
 class ProductLineSerializer(serializers.ModelSerializer):
