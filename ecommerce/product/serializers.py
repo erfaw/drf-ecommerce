@@ -47,6 +47,7 @@ class ProductLineSerializer(serializers.ModelSerializer):
             "product_name",
             "order",
             "product_image",
+            "attribute_value",
         ]
 
 
