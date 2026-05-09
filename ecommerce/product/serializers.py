@@ -36,11 +36,11 @@ class ProductImageSerializer(serializers.ModelSerializer):
 class AttributeSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Attribute
-        exclude = ['id',]
+        exclude = ['id','description']
 
 
 class AttributeValueSerializer(serializers.ModelSerializer):
-    attribute = AttributeSerializer(many=True)
+    attribute = AttributeSerializer(many=False)
 
     class Meta: 
         model = AttributeValue
