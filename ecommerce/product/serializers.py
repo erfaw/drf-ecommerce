@@ -53,6 +53,7 @@ class AttributeValueSerializer(serializers.ModelSerializer):
 class ProductLineSerializer(serializers.ModelSerializer):
     product_name = serializers.CharField(source="product.name")
     product_image = ProductImageSerializer(many=True)
+    attribute_value = AttributeValueSerializer(many=True)
 
     class Meta:
         model = ProductLine
