@@ -101,6 +101,7 @@ class ProductLine(models.Model):
     )  # pyright: ignore[reportCallIssue]
     is_active = models.BooleanField(default=False)
     attribute_value = models.ManyToManyField(AttributeValue, through=ProductLineAttributeValue, related_name="product_line_attribute_value")
+    product_type = models.ForeignKey('ProductType', on_delete=models.PROTECT, related_name="product_line")
     # `related_name` fields:
     # product_line_attribute_value_pl
     # product_image
@@ -152,6 +153,11 @@ class ProductImage(models.Model):
 class ProductType(models.Model):
     name = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.name
+    # `related_name` fields
+    # product_line
+
 
 class ProductTypeAttribute(models.Model):
     product_type = models.ForeignKey(ProductType, on_delete=models.PROTECT, related_name="product_type_attribute_pt")
@@ -159,4 +165,7 @@ class ProductTypeAttribute(models.Model):
 
     class Meta:
         unique_together = ["product_type", "attribute",]
+    
+    def __str__(self):
+        return f"{self.product_type} : {self.attribute}"
     
