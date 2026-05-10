@@ -8,6 +8,7 @@ from .models import (
     Attribute,
     AttributeValue,
     ProductLineAttributeValue,
+    ProductType
 )
 from django.urls import reverse
 from django.utils.safestring import mark_safe
@@ -96,6 +97,7 @@ class ProductLineAdmin(admin.ModelAdmin):
     list_per_page = 25
     inlines = [ProductImageInline, AttributeValueInline,]
 
+
 class ProductImageAdmin(admin.ModelAdmin):
     list_display = (
         "id",
@@ -110,6 +112,7 @@ class ProductImageAdmin(admin.ModelAdmin):
         "url"
     )
     list_per_page = 25
+
 
 class AttributeAdmin(admin.ModelAdmin):
     list_display = (
@@ -151,6 +154,7 @@ class ProductLineAttributeValueAdmin(admin.ModelAdmin):
     list_per_page = 25
 
 
+admin.site.register(ProductType,)
 admin.site.register(ProductLineAttributeValue, ProductLineAttributeValueAdmin)
 admin.site.register(AttributeValue, AttributeValueAdmin)
 admin.site.register(Attribute, AttributeAdmin)
