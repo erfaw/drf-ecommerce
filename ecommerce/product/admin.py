@@ -39,6 +39,10 @@ class AttributeValueInline(admin.TabularInline):
     model = AttributeValue.product_line_attribute_value.through # type: ignore
 
 
+class AttributeInline(admin.TabularInline):
+    model = Attribute.product_type_attribute.through # type: ignore
+
+
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ("id", "name", "parent")
     list_filter = ("name",)
@@ -154,7 +158,11 @@ class ProductLineAttributeValueAdmin(admin.ModelAdmin):
     list_per_page = 25
 
 
-admin.site.register(ProductType,)
+class ProductTypeAdmin(admin.ModelAdmin):
+    inlines = [AttributeInline,]
+
+
+admin.site.register(ProductType, ProductTypeAdmin)
 admin.site.register(ProductLineAttributeValue, ProductLineAttributeValueAdmin)
 admin.site.register(AttributeValue, AttributeValueAdmin)
 admin.site.register(Attribute, AttributeAdmin)
