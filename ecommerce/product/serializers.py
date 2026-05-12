@@ -84,6 +84,7 @@ class ProductLineSerializer(serializers.ModelSerializer):
 
         return data
 
+
 class ProductSerializer(serializers.ModelSerializer):
     brand_name = serializers.CharField(source="brand.name")
     category_name = serializers.CharField(source="category.name")
