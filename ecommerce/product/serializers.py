@@ -68,6 +68,21 @@ class ProductLineSerializer(serializers.ModelSerializer):
             "attribute_value",
         ]
 
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        av_data = data.pop('attribute_value')
+        
+        attr_value = {}
+        for key in av_data:
+            attr_value.update({
+                key['attribute']['name']: key['value']
+            })
+
+        data.update({
+            'specification': attr_value
+        })
+
+        return data
 
 class ProductSerializer(serializers.ModelSerializer):
     brand_name = serializers.CharField(source="brand.name")
