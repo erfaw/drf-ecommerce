@@ -111,7 +111,7 @@ class ProductLine(models.Model):
 
 
     def clean(self):
-        qs = ProductLine.objects.filter(product=self.product)
+        qs = ProductLine.objects.filter(product=self.product) # TODO : Use `.get()` instead.
         for obj in qs:
             if self.pk != obj.pk and self.order == obj.order:
                 raise ValidationError("Duplicate value .")
