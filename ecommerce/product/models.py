@@ -90,6 +90,21 @@ class ProductLineAttributeValue(models.Model):
     def __str__(self):
         return f"{self.product_line} : {self.attribute_value}"
 
+    def clean(self):
+        qs = ProductLineAttributeValue.objects.filter(attribute_value=self.attribute_value).filter(product_line=self.product_line).exists()
+
+        if not qs: 
+            iqs = Attribute.objects.filter(
+                attribute_value__product_line_attribute_value=self.product_line
+            ).values_list("pk", flat=True)
+
+            if self.attribute_value.attribute.pk in list(iqs):
+                raise ValidationError("Duplicate attribute exists")
+
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        return super(ProductLineAttributeValue, self).save(*args, **kwargs)
+
 
 class ProductLine(models.Model):
     name = models.CharField(max_length=100)
