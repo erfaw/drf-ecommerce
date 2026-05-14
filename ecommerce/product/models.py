@@ -45,6 +45,7 @@ class Product(models.Model):
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
     category = TreeForeignKey(Category, on_delete=models.PROTECT, null=True, blank=True)
     is_active = models.BooleanField(default=False)
+    product_type = models.ForeignKey('ProductType', on_delete=models.PROTECT, related_name="product_line")
     # `related_name` fields
     # product_line
     objects = ActiveQuerySet.as_manager()  # objects = models.Manager()
@@ -128,7 +129,6 @@ class ProductLine(models.Model):
     )  # pyright: ignore[reportCallIssue]
     is_active = models.BooleanField(default=False)
     attribute_value = models.ManyToManyField(AttributeValue, through=ProductLineAttributeValue, related_name="product_line_attribute_value")
-    product_type = models.ForeignKey('ProductType', on_delete=models.PROTECT, related_name="product_line")
     # `related_name` fields:
     # product_line_attribute_value_pl
     # product_image
