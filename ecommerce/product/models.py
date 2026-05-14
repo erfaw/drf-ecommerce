@@ -91,14 +91,14 @@ class ProductLineAttributeValue(models.Model):
         return f"{self.product_line} : {self.attribute_value}"
 
     def clean(self):
-        qs = ProductLineAttributeValue.objects.filter(attribute_value=self.attribute_value).filter(product_line=self.product_line).exists()
+        is_in_db_already = ProductLineAttributeValue.objects.filter(attribute_value=self.attribute_value).filter(product_line=self.product_line).exists()
 
-        if not qs: 
-            iqs = Attribute.objects.filter(
+        if not is_in_db_already: 
+            all_attribute_ids = Attribute.objects.filter(
                 attribute_value__product_line_attribute_value=self.product_line
             ).values_list("pk", flat=True)
 
-            if self.attribute_value.attribute.pk in list(iqs):
+            if self.attribute_value.attribute.pk in list(all_attribute_ids):
                 raise ValidationError("Duplicate attribute exists")
 
     def save(self, *args, **kwargs):
