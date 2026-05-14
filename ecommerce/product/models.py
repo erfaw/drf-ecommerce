@@ -184,7 +184,7 @@ class ProductType(models.Model):
     def __str__(self):
         return self.name
     # `related_name` fields
-    # product_line
+    # product
 
 
 class ProductTypeAttribute(models.Model):
