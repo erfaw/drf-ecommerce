@@ -107,6 +107,7 @@ class ProductSerializer(serializers.ModelSerializer):
     brand_name = serializers.CharField(source="brand.name")
     category_name = serializers.CharField(source="category.name")
     product_line = ProductLineSerializer(many=True)
+    product_type = ProductTypeSerializer()
 
     class Meta:
         model = Product
@@ -116,6 +117,7 @@ class ProductSerializer(serializers.ModelSerializer):
             "description",
             "brand_name",
             "category_name",
+            "product_type",
             "is_digital",
             "product_line",
         ]
