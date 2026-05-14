@@ -78,6 +78,7 @@ class ProductViewSet(viewsets.ViewSet):
             self.queryset.select_related("category", "brand")
             .prefetch_related(Prefetch("product_line"))
             .prefetch_related(Prefetch("product_line__product_image"))
+            .prefetch_related(Prefetch("product_line__attribute_value__attribute"))
             .get(slug=slug),
         )
         return Response(serializer.data)
