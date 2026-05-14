@@ -3,13 +3,14 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from drf_spectacular.utils import extend_schema
-from .models import Category, Brand, Product, ProductLine, ProductImage
+from .models import Category, Brand, Product, ProductLine, ProductImage, ProductType
 from .serializers import (
     CategorySerializer,
     BrandSerializer,
     ProductSerializer,
     ProductLineSerializer,
-    ProductImageSerializer
+    ProductImageSerializer,
+    ProductTypeSerializer
 )
 from django.db.models import Prefetch
 
@@ -109,4 +110,22 @@ class ProductImageViewSet(viewsets.ViewSet):
         Get list of all ProductImages.
         """
         serializer = ProductImageSerializer(self.queryset, many=True)
+        return Response(serializer.data)
+
+
+class ProductTypeViewSet(viewsets.ViewSet):
+    """
+    a ViewSet to work with ProductType model.
+    """
+    queryset = ProductType.objects.all()
+    serializer_class = ProductTypeSerializer
+
+    def list(self, request):
+        """
+        Get all ProductTypes.
+        """
+        serializer = self.serializer_class(
+            self.queryset,
+            many=True
+        )
         return Response(serializer.data)
