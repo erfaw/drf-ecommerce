@@ -1,7 +1,14 @@
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from ecommerce.product.views import CategoryViewSet, BrandViewSet, ProductViewSet, ProductLineViewSet, ProductImageViewSet
+from ecommerce.product.views import (
+    CategoryViewSet,
+    BrandViewSet,
+    ProductViewSet,
+    ProductLineViewSet,
+    ProductImageViewSet,
+    ProductTypeViewSet
+)
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from django.conf.urls.static import static
 from django.conf import settings
@@ -12,6 +19,7 @@ router.register(r"brand", BrandViewSet)
 router.register(r"product", ProductViewSet)
 router.register(r"product-line", ProductLineViewSet)
 router.register(r"product-image", ProductImageViewSet)
+router.register(r"product-type", ProductTypeViewSet)
 
 
 urlpatterns = [
