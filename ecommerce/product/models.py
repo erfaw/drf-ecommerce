@@ -45,7 +45,7 @@ class Product(models.Model):
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
     category = TreeForeignKey(Category, on_delete=models.PROTECT, null=True, blank=True)
     is_active = models.BooleanField(default=False)
-    product_type = models.ForeignKey('ProductType', on_delete=models.PROTECT, related_name="product_line")
+    product_type = models.ForeignKey('ProductType', on_delete=models.PROTECT, related_name="product")
     # `related_name` fields
     # product_line
     objects = ActiveQuerySet.as_manager()  # objects = models.Manager()
