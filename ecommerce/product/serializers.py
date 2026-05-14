@@ -94,6 +94,15 @@ class ProductLineSerializer(serializers.ModelSerializer):
         return data
 
 
+class ProductTypeSerializer(serializers.ModelSerializer):
+    attribute = AttributeSerializer(many=True)
+    # product = ProductSerializer(many=True)
+
+    class Meta:
+        model = ProductType
+        fields = "__all__"
+
+
 class ProductSerializer(serializers.ModelSerializer):
     brand_name = serializers.CharField(source="brand.name")
     category_name = serializers.CharField(source="category.name")
@@ -117,11 +126,3 @@ class ProductSerializer(serializers.ModelSerializer):
         # TODO: Make it like 'ProductLineSerializer.to_representation()'
 
         return data
-
-class ProductTypeSerializer(serializers.ModelSerializer):
-    attribute = AttributeSerializer(many=True)
-    product = ProductSerializer(many=True)
-
-    class Meta:
-        model = ProductType
-        fields = "__all__"
