@@ -110,7 +110,13 @@ class ProductSerializer(serializers.ModelSerializer):
             "is_digital",
             "product_line",
         ]
+    
+    def to_representation(self, instance):
+        data:dict = super().to_representation(instance)
 
+        # TODO: Make it like 'ProductLineSerializer.to_representation()'
+
+        return data
 
 class ProductTypeSerializer(serializers.ModelSerializer):
     attribute = AttributeSerializer(many=True)
