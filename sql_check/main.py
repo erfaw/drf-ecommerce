@@ -20,3 +20,6 @@ def run_sql_check():
 
     print(f"Number of Executed Queries:\t{len(raw_sql)}")
     print("===== (END) Query N+1 Checks  =====")
+
+def clear_connection_queries():
+    connection.queries.clear()
