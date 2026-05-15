@@ -100,7 +100,10 @@ class ProductTypeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ProductType
-        fields = "__all__"
+        fields = [
+            "name",
+            "attribute",
+        ]
 
 
 class ProductSerializer(serializers.ModelSerializer):
