@@ -45,7 +45,7 @@ class ProductImageSerializer(serializers.ModelSerializer):
 class AttributeSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Attribute
-        exclude = ['id','description']
+        exclude = ['description']
 
 
 class AttributeValueSerializer(serializers.ModelSerializer):
@@ -110,7 +110,7 @@ class ProductSerializer(serializers.ModelSerializer):
     brand_name = serializers.CharField(source="brand.name")
     category_name = serializers.CharField(source="category.name")
     product_line = ProductLineSerializer(many=True)
-    product_type = ProductTypeSerializer()
+    attribute = serializers.SerializerMethodField()
 
     class Meta:
         model = Product
@@ -120,14 +120,27 @@ class ProductSerializer(serializers.ModelSerializer):
             "description",
             "brand_name",
             "category_name",
-            "product_type",
+            "attribute",
             "is_digital",
             "product_line",
         ]
     
+    def get_attribute(self, obj):
+        attribute = Attribute.objects.filter(product_type_attribute__product__id=obj.id)
+        return AttributeSerializer(attribute, many=True).data
+
     def to_representation(self, instance):
         data:dict = super().to_representation(instance)
+        attribute_data = data.pop('attribute')
+        
+        attr_value = {}
+        for key in attribute_data:
+            attr_value.update({
+                key['id']: key['name']
+            })
 
-        # TODO: Make it like 'ProductLineSerializer.to_representation()'
+        data.update({
+            'type_attribute': attr_value
+        })
 
         return data
