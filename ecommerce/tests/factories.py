@@ -1,5 +1,6 @@
 import factory
-from factory.declarations import SubFactory, Sequence 
+from factory.declarations import SubFactory, Sequence
+from factory.helpers import post_generation
 from ecommerce.product.models import (
     Brand,
     Category,
@@ -47,7 +48,12 @@ class ProductTypeFactory(factory.django.DjangoModelFactory):
         model = ProductType
 
     name = Sequence(lambda num: f"product-type-test-{num}")
-    # attribute = SubFactory(AttributeFactory)
+    
+    @post_generation
+    def attribute(self, create, extracted, **kwargs):
+        if not create or not extracted:
+            return 
+        self.attribute.add(*extracted) # type: ignore
 
 
 class ProductFactory(factory.django.DjangoModelFactory):
@@ -74,6 +80,12 @@ class ProductLineFactory(factory.django.DjangoModelFactory):
     product = SubFactory(ProductFactory)
     is_active = True
     # Why there is not any 'order' ==> because its generate automaticly
+    
+    @post_generation
+    def attribute_value(self, create, extracted, **kwargs):
+        if not create or not extracted:
+            return 
+        self.attribute_value.add(*extracted) # type: ignore
 
 
 class ProductImageFactory(factory.django.DjangoModelFactory):
