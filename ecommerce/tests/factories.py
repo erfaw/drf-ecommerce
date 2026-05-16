@@ -1,6 +1,13 @@
 import factory
 from factory.declarations import SubFactory, Sequence 
-from ecommerce.product.models import Brand, Category, Product, ProductLine, ProductImage
+from ecommerce.product.models import (
+    Brand,
+    Category,
+    Product,
+    ProductLine,
+    ProductImage,
+    Attribute,
+)
 
 
 class CategoryFactory(factory.django.DjangoModelFactory):
@@ -15,6 +22,14 @@ class BrandFactory(factory.django.DjangoModelFactory):
         model = Brand
 
     name = Sequence(lambda n: f"brand-{n}")
+
+
+class AttributeFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Attribute
+
+    name = Sequence(lambda num: f"attribute-test-{num}")
+    description = "descriptino-test"
 
 
 class ProductFactory(factory.django.DjangoModelFactory):
@@ -51,4 +66,3 @@ class ProductImageFactory(factory.django.DjangoModelFactory):
     url = "https://url-test.com"
     productline = SubFactory(ProductLineFactory)
     # Why there is not any 'order' ==> because its generate automaticly
-    
