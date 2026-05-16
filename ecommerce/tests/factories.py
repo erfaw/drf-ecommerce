@@ -7,6 +7,7 @@ from ecommerce.product.models import (
     ProductLine,
     ProductImage,
     Attribute,
+    ProductType,
 )
 
 
@@ -30,6 +31,14 @@ class AttributeFactory(factory.django.DjangoModelFactory):
 
     name = Sequence(lambda num: f"attribute-test-{num}")
     description = "descriptino-test"
+
+
+class ProductTypeFactory(factory.django.DjangoModelFactory):
+    class Meta: 
+        model = ProductType
+
+    name = Sequence(lambda num: f"product-type-test-{num}")
+    # attribute = SubFactory(AttributeFactory)
 
 
 class ProductFactory(factory.django.DjangoModelFactory):
