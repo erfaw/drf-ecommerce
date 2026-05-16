@@ -51,6 +51,7 @@ class ProductFactory(factory.django.DjangoModelFactory):
     brand = SubFactory(BrandFactory)
     category = SubFactory(CategoryFactory)
     is_active = True
+    product_type = SubFactory(ProductTypeFactory)
 
 
 class ProductLineFactory(factory.django.DjangoModelFactory):
