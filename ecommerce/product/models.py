@@ -179,7 +179,7 @@ class ProductImage(models.Model):
 
 class ProductType(models.Model):
     name = models.CharField(max_length=100)
-    attribute = models.ManyToManyField(Attribute, through='ProductTypeAttribute', related_name="product_type_attribute")
+    attribute = models.ManyToManyField(Attribute, through='ProductTypeAttribute', related_name="product_type_attribute") # TODO : change related_name arg to 'product_type'. ask about it. 
 
     def __str__(self):
         return self.name
