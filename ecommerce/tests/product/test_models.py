@@ -84,3 +84,10 @@ class TestProductImageModel:
         INPUT_NAME = 'test-name'
         obj = product_image_factory(name=INPUT_NAME)
         assert obj.__str__() == INPUT_NAME
+
+
+class TestAttributeModel:
+    def test_str_method(self, attribute_factory):
+        INPUT_NAME = 'test-name'
+        obj = attribute_factory(name=INPUT_NAME)
+        assert obj.__str__() == INPUT_NAME
