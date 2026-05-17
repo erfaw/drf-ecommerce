@@ -66,11 +66,8 @@ class TestProductModel:
 
 class TestProductLineModel:
     def test_str_method(self, product_line_factory):
-        # Arrange
-        # Act
-        _unit = product_line_factory()
-        # Assert
-        assert _unit.__str__() == _unit.sku
+        product_line_obj = product_line_factory()
+        assert product_line_obj.__str__() == product_line_obj.sku
 
     def test_duplicate_order_values(self, product_factory, product_line_factory):
         obj = product_factory()
