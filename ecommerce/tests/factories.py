@@ -46,6 +46,7 @@ class AttributeValueFactory(factory.django.DjangoModelFactory):
 class ProductTypeFactory(factory.django.DjangoModelFactory):
     class Meta: 
         model = ProductType
+        skip_postgeneration_save = True
 
     name = Sequence(lambda num: f"product-type-test-{num}")
     
@@ -54,7 +55,7 @@ class ProductTypeFactory(factory.django.DjangoModelFactory):
         if not create or not extracted:
             return 
         self.attribute.add(*extracted) # type: ignore
-
+        self.save() # type: ignore
 
 class ProductFactory(factory.django.DjangoModelFactory):
     class Meta:
@@ -72,6 +73,7 @@ class ProductFactory(factory.django.DjangoModelFactory):
 class ProductLineFactory(factory.django.DjangoModelFactory):
     class Meta: 
         model = ProductLine
+        skip_postgeneration_save = True
 
     name = Sequence(lambda n: f"ProductLine-{n}")
     price = 999.10
@@ -86,6 +88,7 @@ class ProductLineFactory(factory.django.DjangoModelFactory):
         if not create or not extracted:
             return 
         self.attribute_value.add(*extracted) # type: ignore
+        self.save() # type: ignore
 
 
 class ProductImageFactory(factory.django.DjangoModelFactory):
