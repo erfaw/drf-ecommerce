@@ -106,3 +106,14 @@ class TestAttributeValueModel:
         )
 
         assert attribute_value_obj.__str__() == f"{ATTRIBUTE_OBJ_NAME}=\t{VALUE_STR}"
+
+
+class TestProductTypeModel:
+    def test_str_method(self, product_type_factory, attribute_factory):
+        attribute_obj = attribute_factory()
+        INPUT_NAME = 'test_category-'
+        product_type_obj = product_type_factory(
+            name=INPUT_NAME,
+            attribute=(attribute_obj,)
+        )
+        assert product_type_obj.__str__() == INPUT_NAME
