@@ -3,7 +3,10 @@ from .factories import (
     BrandFactory, 
     ProductFactory, 
     ProductLineFactory,
-    ProductImageFactory
+    ProductImageFactory,
+    ProductTypeFactory,
+    AttributeFactory,
+    AttributeValueFactory,
     )
 from pytest_factoryboy import register
 from rest_framework.test import APIClient
@@ -14,7 +17,9 @@ register(BrandFactory)
 register(ProductFactory)
 register(ProductLineFactory)
 register(ProductImageFactory)
-
+register(ProductTypeFactory)
+register(AttributeFactory)
+register(AttributeValueFactory)
 
 @pytest.fixture
 def api_client():
