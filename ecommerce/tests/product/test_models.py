@@ -91,3 +91,18 @@ class TestAttributeModel:
         INPUT_NAME = 'test-name'
         obj = attribute_factory(name=INPUT_NAME)
         assert obj.__str__() == INPUT_NAME
+
+
+class TestAttributeValueModel:
+    def test_str_method(self, attribute_factory, attribute_value_factory):
+        # f"{self.attribute}=\t{self.value}"
+        ATTRIBUTE_OBJ_NAME = 'attr_test'
+        attribute_obj = attribute_factory(name=ATTRIBUTE_OBJ_NAME)
+
+        VALUE_STR = 'tetest'
+        attribute_value_obj = attribute_value_factory(
+            value = VALUE_STR,
+            attribute = attribute_obj,
+        )
+
+        assert attribute_value_obj.__str__() == f"{ATTRIBUTE_OBJ_NAME}=\t{VALUE_STR}"
